@@ -1,0 +1,26 @@
+For the program:
+•	The program needs admin and a user account. Here are the details of the user account.
+1.	Must have the ability to create an account, including such information as name, credit card, pricing plan, and username/password
+2.	Must be able to
+I.	Upload and Store: Videos, photos, messages
+II.	Add Recipient Email Addresses. 
+i.	The items from 2I must have at least one, but not limited to one designated receiver email address. The user account must be able to designate each specific uploaded item to a specific email address (or multiple). 
+ii.	For instance, a video could go to auntbertha@email.com and unclerobert@email.com.
+iii.	A separate photo could also go to another email Recipient, such as auntbertha@email.com. 
+iv.	Recipients and items are all depending on what options the user selects. 
+3.	User Accounts Ability Summary
+I.	Change their subscription plan
+II.	Add, Modify, Delete items identified in 2I.
+III.	Add Recipient Email Addresses
+IV.	Designate 2I items to be sent to Recipient email addresses
+•	After the accounts have been created:
+1.	A random, unique, 15-digit code is generated. This code is viewable via their account page.
+2.	That above code, if entered on a prompt (does not require a login), will initiate a 7-day timer and notifies the user account (the one bound to the unique code) via email. 
+I.	For instance, if my account is “fortestaccount” and my email is “fortestaccount@email.com”. Also if the unique code that was generated is 12AbcgEf9!0!&$@.
+i.	If I go onto our website, I should be able to enter that code, 12AbcgEf9!0!&$@, into a text box. 
+ii.	Once the code is accepted, 7-day timer begins. 
+iii.	An email is immediately sent to “fortestaccount@email.com” explaining the timer’s activation.
+iv.	If at any time during the next 7 days the “fortestaccount” user logs on, the timer is deactivated. 
+v.	However, if after 7 days the “fortestaccount” user never logs on, then all items tied to the “fortestaccount” are immediately sent to the designated recipient email addresses. Including photos, videos, text letters. 
+vi.	After the timer finishes and the items are sent, billing stops for the “fortestaccount” user and the account is deactivated.
+
