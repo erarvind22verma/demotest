@@ -1,0 +1,110 @@
+<?php
+
+/*
+* Implements hook_menu
+*
+*/
+
+function custom_user_activities_menu(){
+$items = array();
+
+$items['create-new-user'] = array(
+    'title' => t("Create New User"),
+    'page callback' => 'custom_create_new_user',
+    'access arguments' => array('Custom Create New Users'),
+    'type' => MENU_CALLBACK,
+	'file'=>'custom_user_activities.pages.inc',
+);
+	return $items;
+
+}
+
+/*
+* Implements hook_permission
+*/
+
+function custom_user_activities_permission() {
+  return array(
+    'Custom Create New Users' => array(
+      'title' => t('Create New Trail User'),
+    ),
+  );
+}
+
+
+function custom_user_activities_node_insert($node){
+if($node->type=="email"){
+	if(sizeof($node->field_send_email_now)){
+	if($node->field_send_email_now[$node->language][0]['value']){
+	
+	}
+	}
+}
+}
+
+
+
+function custom_user_activities_form($form,&$form_state){
+$form = array();
+
+$form["unique_code"] = array(
+"#type" =>"textfield",
+"#title" =>t("Please Enter Code First"),
+"#required" => TRUE,	
+);
+
+$form["submit"] = array(
+"#type"=>"submit",
+"#value" =>"Submit",	
+);
+return $form;
+
+}
+
+
+function custom_user_activities_init(){
+
+$query = db_select("user_site_visit_statistic","svs");
+$query->fields("svs",array("expire"));
+$query->condition("svs.uid",$form_state["values"]["unique_code"],"=");
+$result = $query->execute()->fetchfield();
+
+
+
+
+if($_SESSION["key_status"] < time()){
+$form = drupal_get_form("custom_user_activities_form");
+print render($form);//die;
+}
+
+
+}
+
+function custom_user_activities_form_submit($form,&$form_state){
+$query = db_select("field_data_field_unique_code","fce");
+$query->fields("fce",array("entity_id"));
+$query->condition("fce.field_unique_code_value",$form_state["values"]["unique_code"],"=");
+$result = $query->execute()->fetchfield();
+if($result){
+	$expire_time = strtotime("+1 Minute");
+db_insert('user_site_visit_statistic')
+      ->fields(array(
+        'uid' =>$result,
+        'timer_start_time' => time(),
+        'timer_expire_time' => $expire_time,
+        'expire' => 0,
+      ))
+      ->execute();
+
+$_SESSION["key_status"] = $expire_time;
+
+}else{
+drupal_set_message(t("Please insert correct code."),"error");
+}
+
+}
+
+
+
+
+
